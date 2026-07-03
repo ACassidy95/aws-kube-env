@@ -12,26 +12,26 @@ variable "region" {
 
 variable "vpc_cidr_range" {
   type        = string
-  default     = "10.0.0.0/26" // Give space for 64 IPs by default
+  default     = "10.0.0.0/24" // Give space for 256 IPs by default
   description = "Range of private IP allocatable within the VPC"
 }
 
 variable "subnet_config_public" {
   type = map(string)
-  default = { // Give 24 of the default 64
-    "eu-west-1a" = "10.0.0.0/29"
-    "eu-west-1b" = "10.0.0.8/29"
-    "eu-west-1c" = "10.0.0.16/29"
+  default = { // Give 48 of defult 256
+    "eu-west-1a" = "10.0.0.0/27"
+    "eu-west-1b" = "10.0.0.32/27"
+    "eu-west-1c" = "10.0.0.64/27"
   }
   description = "Maps availability zones to public subnet CIDRs"
 }
 
 variable "subnet_config_private" {
   type = map(string)
-  default = { // Give 24 of the default 64
-    "eu-west-1a" = "10.0.0.24/29"
-    "eu-west-1b" = "10.0.0.32/29"
-    "eu-west-1c" = "10.0.0.40/29"
+  default = { // Give 48 of default 256 of the default 64
+    "eu-west-1a" = "10.0.0.96/27"
+    "eu-west-1b" = "10.0.0.128/27"
+    "eu-west-1c" = "10.0.0.160/27"
   }
   description = "Maps availability zones to private subnet CIDRs"
 }
