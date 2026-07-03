@@ -54,7 +54,7 @@ resource "aws_eip" "this" {
 
 resource "aws_nat_gateway" "this" {
   allocation_id = aws_eip.this.id
-  subnet_id     = aws_subnet.this_public[var.nat_zone]
+  subnet_id     = aws_subnet.this_public[var.nat_zone].id
 
   tags = {
     Name = "${var.base_name}-nat"
