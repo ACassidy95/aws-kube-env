@@ -33,5 +33,5 @@ resource "aws_iam_role" "this" {
 
 resource "aws_iam_role_policy_attachment" "eks_cluster_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  role       = aws_iam_role.this
+  role       = aws_iam_role.this.arn
 }
