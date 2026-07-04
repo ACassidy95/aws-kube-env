@@ -1,15 +1,14 @@
 output "vpc_id" {
   description = "ID of the created VPC"
-  value       = aws_vpc.this.id
+  value       = module.cluster-networking.vpc_id
 }
 
 output "public_subnet_ids" {
   description = "List of IDs of the public subnets created within the VPC"
-  value       = aws_subnet.this_public.id
+  value       = module.cluster-networking.public_subnet_ids
 }
 
 output "private_subnet_ids" {
   description = "List of IDs of the private subnets created within the VPC"
-  value       = aws_subnet.this_private.id
+  value       = module.cluster-networking.private_subnet_ids
 }
-
