@@ -12,6 +12,6 @@ variable "cluster_version" {
 
 variable "subnet_ids" {
   type        = list(string)
-  default     = ""
+  default     = []
   description = "IDs of the private subnets to deploy cluster instances into"
 }
