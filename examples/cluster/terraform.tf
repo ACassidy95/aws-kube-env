@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket       = "aaron-c-dev-state"
+    bucket       = "aaronc-dev-state-backend"
     key          = "state/kube-env/examples/cluster/terraform.tf"
     region       = "eu-west-1"
     encrypt      = true
