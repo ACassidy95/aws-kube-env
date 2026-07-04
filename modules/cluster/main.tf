@@ -8,7 +8,9 @@ resource "aws_eks_cluster" "this" {
 
   role_arn = aws_iam_role.this.arn
 
-  depends_on = []
+  // Create role attachment before cluster and destroy it after, otherwise
+  // EKS controller may lose ability to interact with EKS-managed EC2 infra
+  depends_on = [aws_iam_role_policy_attachment.eks_cluster_policy]
 }
 
 resource "aws_iam_role" "this" {
@@ -29,7 +31,7 @@ resource "aws_iam_role" "this" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "this" {
+resource "aws_iam_role_policy_attachment" "eks_cluster_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   role       = aws_iam_role.this
 }
