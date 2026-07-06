@@ -4,11 +4,11 @@ resource "aws_eks_cluster" "this" {
 
   vpc_config {
     endpoint_private_access = false
-    endpoint_public_acces   = true
+    endpoint_public_access  = true
     subnet_ids              = var.subnet_ids
   }
 
-  role_arn = aws_iam_role.this.arn
+  role_arn = aws_iam_role.cluster.arn
 
   access_config {
     authentication_mode                         = "API"
@@ -17,12 +17,12 @@ resource "aws_eks_cluster" "this" {
 
   // Create role attachment before cluster and destroy it after, otherwise
   // EKS controller may lose ability to interact with EKS-managed EC2 infra
-  depends_on = [aws_iam_role_policy_attachment.eks_cluster_policy]
+  depends_on = [aws_iam_role_policy_attachment.cluster_policy]
 }
 
 resource "aws_eks_node_group" "this" {
   cluster_name    = aws_eks_cluster.this.name
-  version         = var.cluser_version
+  version         = var.cluster_version
   node_group_name = "${var.base_name}-default-node-group"
   node_role_arn   = aws_iam_role.node.arn
 
@@ -36,7 +36,7 @@ resource "aws_eks_node_group" "this" {
     min_size     = 1
   }
 
-  updae_config {
+  update_config {
     max_unavailable = 1
   }
 
