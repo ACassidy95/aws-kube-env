@@ -23,7 +23,7 @@ resource "aws_eks_cluster" "this" {
 resource "aws_eks_node_group" "this" {
   cluster_name    = aws_eks_cluster.this.name
   version         = var.cluser_version
-  node_group_name = "${var.base_name}-node-group"
+  node_group_name = "${var.base_name}-default-node-group"
   node_role_arn   = aws_iam_role.node.arn
 
   subnet_ids     = var.subnet_ids
@@ -41,7 +41,7 @@ resource "aws_eks_node_group" "this" {
   }
 
   labels = {
-    role = "general"
+    role = "default"
   }
 
   depends_on = [
