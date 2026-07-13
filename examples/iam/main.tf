@@ -1,4 +1,4 @@
-module "developer_role" {
+module "iam" {
   source                    = "../../modules/iam"
   base_name                 = var.base_name
   cluster_name              = var.cluster_name

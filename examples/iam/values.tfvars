@@ -1,4 +1,4 @@
-base_name    = "developer"
+base_name    = "aaron-test"
 region       = "eu-west-1"
 cluster_name = "aaron-test-cluster"
 viewer_kubernetes_groups = [
