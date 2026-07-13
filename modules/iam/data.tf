@@ -54,9 +54,7 @@ data "aws_iam_policy_document" "admin_role_policy" {
       "sts:AssumeRole",
     ]
 
-    resources = [
-      "*"
-    ]
+    effect = "Allow"
 
     principals {
       type        = "AWS"
