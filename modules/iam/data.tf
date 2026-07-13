@@ -12,6 +12,17 @@ data "aws_iam_policy_document" "viewer" {
   }
 }
 
+data "aws_iam_policy_document" "manager" {
+  statement {
+    actions = [
+      "sts:AssumeRole"
+    ]
+    resources = [
+      "${aws_iam_role.admin.arn}"
+    ]
+  }
+}
+
 data "aws_iam_policy_document" "admin" {
   statement {
     actions = [
