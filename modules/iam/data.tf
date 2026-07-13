@@ -2,9 +2,10 @@ data "aws_caller_identity" "current" {}
 
 data "aws_iam_policy_document" "viewer" {
   statement {
+    effect = "Allow"
     actions = [
       "eks:DescribeCluster",
-      "eks:ListerClusters",
+      "eks:ListClusters"
     ]
     resources = [
       "*"
@@ -12,8 +13,9 @@ data "aws_iam_policy_document" "viewer" {
   }
 }
 
-data "aws_iam_policy_document" "manager" {
+data "aws_iam_policy_document" "assume_admin" {
   statement {
+    effect = "Allow"
     actions = [
       "sts:AssumeRole"
     ]
@@ -25,6 +27,7 @@ data "aws_iam_policy_document" "manager" {
 
 data "aws_iam_policy_document" "admin" {
   statement {
+    effect = "Allow"
     actions = [
       "eks:*"
     ]
@@ -37,13 +40,14 @@ data "aws_iam_policy_document" "admin" {
     actions = [
       "iam:PassRole"
     ]
+    effect = "Allow"
     resources = [
       "*"
     ]
     condition {
-      test     = "ForAnyValue:StringEquals"
+      test     = "StringEquals"
       variable = "iam:PassedToService"
-      values   = ["eks.amazon.com"]
+      values   = ["eks.amazonaws.com"]
     }
   }
 }
@@ -51,7 +55,7 @@ data "aws_iam_policy_document" "admin" {
 data "aws_iam_policy_document" "admin_role_policy" {
   statement {
     actions = [
-      "sts:AssumeRole",
+      "sts:AssumeRole"
     ]
 
     effect = "Allow"
